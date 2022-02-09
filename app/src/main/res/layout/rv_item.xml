@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_marginTop="16dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/articleThumb"
+            android:layout_weight="2"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:srcCompat="@tools:sample/avatars" />
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:padding="4dp"
+            android:layout_marginStart="4dp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/articleTitle"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:maxLines="2"
+                android:padding="4dp"
+                android:ellipsize="end"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Title" />
+
+            <TextView
+                android:id="@+id/articleDesc"
+                android:maxLines="3"
+                android:padding="4dp"
+                android:ellipsize="end"
+                android:minLines="4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="lorem ipsum text is jbdjhqwhjgd wqjdgwd qjwgduwfjb 1jkgfu13f" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_gravity="bottom"
+                android:padding="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/articlePub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CNN" />
+            </LinearLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>
