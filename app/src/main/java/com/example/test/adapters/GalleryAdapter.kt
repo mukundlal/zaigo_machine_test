@@ -4,11 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.test.R
+import kotlinx.android.synthetic.main.gallery_item.view.*
+import java.io.File
 
 class GalleryAdapter:RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
 
-
+     var fileList=ArrayList<File>()
     class ViewHolder(val view: View):RecyclerView.ViewHolder(view) {
 
     }
@@ -19,9 +22,18 @@ class GalleryAdapter:RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+           Glide.with( holder.itemView.image)
+               .load(fileList[position])
+               .into(holder.itemView.image)
     }
 
     override fun getItemCount(): Int {
-       return 10
+       return fileList.size
+    }
+    fun setData(data:List<File>)
+    {
+        fileList.clear()
+        fileList.addAll(data)
+        notifyDataSetChanged()
     }
 }
