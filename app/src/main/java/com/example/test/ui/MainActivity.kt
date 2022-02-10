@@ -1,8 +1,6 @@
 package com.example.test.ui
 
-import android.content.DialogInterface
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -24,12 +22,15 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     lateinit var rvAdapter: RvAdapter
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         rvAdapter= RvAdapter()
         rvList.adapter=rvAdapter
-        getApiData()
+
+        getApiData()//Fetch data from api
 
         btn_map.setOnClickListener {
 
@@ -71,26 +72,34 @@ class MainActivity : AppCompatActivity() {
     private fun getApiData() {
 
         rv_loading.show()
-        RetrofitClient2.apiInterface.getNews()
-            .enqueue(object : Callback<NewsResponse> {
-                override fun onResponse(
-                    call: Call<NewsResponse>,
-                    response: Response<NewsResponse>
-                ) {
-                    rv_loading.hide()
-                    if (response.isSuccessful&&response.body()!=null)
-                    {
-                        rvAdapter.setData(response.body()!!.articles)
-                        Toast.makeText(this@MainActivity,"Data fetched",Toast.LENGTH_SHORT).show();
+
+        try {
+            RetrofitClient2.apiInterface.getNews()
+                .enqueue(object : Callback<NewsResponse> {
+                    override fun onResponse(
+                        call: Call<NewsResponse>,
+                        response: Response<NewsResponse>
+                    ) {
+                        rv_loading.hide()
+                        if (response.isSuccessful&&response.body()!=null) //Check if data exist
+                        {
+                            rvAdapter.setData(response.body()!!.articles)
+                            Toast.makeText(this@MainActivity,"Data fetched",Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
 
-                override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
-                    rv_loading.hide()
-                }
+                    override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
+                        //Api call failure
+                        rv_loading.hide()
+                    }
 
 
-            })
+                })
+        }catch (e:Exception)
+        {
+            //Exception
+        }
+
     }
 
 }

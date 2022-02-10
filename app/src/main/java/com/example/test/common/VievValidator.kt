@@ -4,6 +4,9 @@ import android.opengl.Visibility
 import android.view.View
 import android.widget.EditText
 
+
+//Extension functions
+
 fun EditText.isValidInput():Boolean
 {
     return if (this.text.isEmpty())

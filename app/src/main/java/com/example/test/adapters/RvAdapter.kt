@@ -11,7 +11,9 @@ import com.example.test.models.Article
 import kotlinx.android.synthetic.main.rv_item.view.*
 
 class RvAdapter:RecyclerView.Adapter<RvAdapter.ViewHolder>() {
+
     val article=ArrayList<Article>()
+
     class ViewHolder(val view: View):RecyclerView.ViewHolder(view) {
         val articleTitle=view.articleTitle
         val articleDesc=view.articleDesc

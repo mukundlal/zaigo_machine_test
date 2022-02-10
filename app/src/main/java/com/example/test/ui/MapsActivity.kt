@@ -40,14 +40,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
 
         // Add a marker in Sydney and move the camera
+        // Adding a default marker in the map
+
         val sydney = LatLng(-34.0, 151.0)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
 
 
-    fun convertAddress() {
+    private fun convertAddress() {
 
+        //get Lat Lng from typed address
         if (etCity.isValidInput()||etStreet.isValidInput()||etState.isValidInput()) {
             try {
                 val address="${etStreet.text},${etCity.text},${etState.text}"
@@ -55,13 +58,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 if (addressList != null && addressList.isNotEmpty()) {
                     val lat: Double = addressList[0].latitude
                     val lng: Double = addressList[0].longitude
-                    Log.e("Data","$lat,$lng")
                     val newPosition = LatLng(lat, lng)
+
+                    //Clearing old marking and setting new one
                     mMap.clear()
-                    mMap.addMarker(MarkerOptions().position(newPosition).title("$address"))
+                    mMap.addMarker(MarkerOptions().position(newPosition).title(address))
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(newPosition))
+
                 }
             } catch (e: Exception) {
+                //Exception
                 e.printStackTrace()
             }
         }
