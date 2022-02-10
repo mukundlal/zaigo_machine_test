@@ -1,13 +1,19 @@
 package com.example.test.ui
 
+import android.content.DialogInterface
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.example.test.R
 import com.example.test.adapters.RvAdapter
 import com.example.test.common.hide
 import com.example.test.common.show
+import com.example.test.database.SharedPreference
 import com.example.test.models.NewsResponse
 import com.example.test.network.RetrofitClient2
 import kotlinx.android.synthetic.main.activity_main.*
@@ -36,6 +42,32 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_item, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId)
+        {
+            R.id.logout->{
+                AlertDialog.Builder(this)
+                    .setTitle("Logout?")
+                    .setMessage("Are you sure you want to logout?")
+                    .setPositiveButton("yes"){d,w->
+                        SharedPreference(this).setLogin(false)
+                        startActivity(Intent(this,LoginActivity::class.java))
+                        this.finish()
+                    }
+                    .setNegativeButton("No"){d,w->
+                        d.dismiss()
+                    }
+                    .show()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
     private fun getApiData() {
 
         rv_loading.show()
