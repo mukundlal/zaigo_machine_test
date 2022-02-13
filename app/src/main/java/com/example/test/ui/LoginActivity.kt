@@ -29,18 +29,18 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         preference= SharedPreference(this)
 
-        if (preference.getLoginStatus())
-        {
-            startActivity(Intent(this@LoginActivity,MainActivity::class.java))
-            this@LoginActivity.finish()
-        }
+//        if (preference.getLoginStatus())
+//        {
+//            startActivity(Intent(this@LoginActivity,MainActivity::class.java))
+//            this@LoginActivity.finish()
+//        }
 
 
         loginBtn.setOnClickListener {
 
             etEmail.isValidInput() //validate fields
             etPassword.isValidInput() //validate fields
-            loginUser()//Call userLogin api
+            loginUser() //Call userLogin api
 
         }
 
